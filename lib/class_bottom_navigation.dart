@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_6/BottomCart.dart';
 import 'package:flutter_application_6/BottomFavorite.dart';
 import 'package:flutter_application_6/HomepageTask.dart';
+import 'package:flutter_application_6/data_base.dart';
 
 class ClassBottomNavigation extends StatefulWidget {
   const ClassBottomNavigation({super.key});
@@ -22,6 +23,10 @@ class _ClassBottomNavigationState extends State<ClassBottomNavigation> {
     BottomCart(),
     BottomFavorite()
   ];
+  void initState() {
+    categoryList = views;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

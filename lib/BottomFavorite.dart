@@ -27,8 +27,10 @@ class _BottomFavoriteState extends State<BottomFavorite> {
       return CustomFavCard(modelCard: favMeals[index], 
       onTap: (){
         setState(() {
-          int indexOfMeal = views.indexOf(favMeals[index]);
-          views[indexOfMeal] = views[indexOfMeal].copyWith(isfavorite: false);
+          int indexOfMealOfViews = views.indexOf(favMeals[index]);
+          int indexOfMealOfCategory = categoryList.indexOf(favMeals[index]);
+          views[indexOfMealOfViews] = views[indexOfMealOfViews].copyWith(isfavorite: false);
+          categoryList[indexOfMealOfCategory] = categoryList[indexOfMealOfCategory].copyWith(isfavorite: false);
         });
       },);
     },

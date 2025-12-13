@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_application_6/data_base.dart';
+import 'package:flutter_application_6/model_card.dart';
 import 'package:flutter_application_6/widgets/CustomGridviewTask.dart';
 import 'package:flutter_application_6/widgets/custom_widget_task.dart';
 
@@ -9,6 +11,31 @@ class HomePageTask extends StatefulWidget {
 }
 
 class _HomePageTaskState extends State<HomePageTask> {
+  String typeOfCategory = "all";
+  searchInEditText (String query){
+    if(query.isEmpty){
+      searchInCategory(typeOfCategory);
+    }
+    else{
+    final filterdText = categoryList.where((m) => m.title.toLowerCase().contains(query)).toList();
+    categoryList = filterdText;}
+  }
+  searchInCategory(String type){
+    typeOfCategory = type;
+    if (type.toLowerCase() == "all"){
+      setState(() {
+        categoryList = views;
+      });
+    }
+    else{
+      final filterd = views.where((m) => m.category.toLowerCase() == type.toLowerCase()).toList();
+      setState(() {
+        categoryList = filterd;
+      });
+    }
+
+  }
+  
   @override
   Widget build(BuildContext context) {
     return 
@@ -32,6 +59,11 @@ class _HomePageTaskState extends State<HomePageTask> {
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white,
                        child: TextField(
+                        onChanged: (value) {                
+                          setState(() {
+                            searchInEditText(value);
+                          });
+                        },
                            decoration: InputDecoration(
                              prefixIcon: Icon(Icons.search,size: 30,),
                              hintText: "Search",
@@ -87,21 +119,29 @@ class _HomePageTaskState extends State<HomePageTask> {
                 margin: EdgeInsets.symmetric(vertical: 15),
                 decoration: BoxDecoration(),
                 height: 35,
-                child: ListView(
+                child: ListView.builder(
                   itemExtent: MediaQuery.of(context).size.width * 0.25,
                   scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  children: texts.map((t) => CustomWidgetTask(widget_title: t)).toList()
-                ),
+                  itemCount: texts.length,
+                  itemBuilder: (context,index){
+                    return InkWell(
+                      onTap: () => setState(() {
+                        searchInCategory(texts[index]);
+                      }),
+                      child: CustomWidgetTask(widget_title: texts[index]));
+                }),
               ),
               Expanded(
-                child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),itemCount: views.length, itemBuilder: (context,index){
-                   return CustomGridviewTask(model: views[index], 
+                child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),itemCount: categoryList.length, itemBuilder: (context,index){
+                   return CustomGridviewTask(model: categoryList[index], 
                    onTap: (){
                     setState(() {
-                      views[index] = views[index].copyWith(
-                      isfavorite: !views[index].isfavorite
-                    );
+                      final item = categoryList[index];
+                      final mainIndex = views.indexOf(item);
+                      views[mainIndex] = views[mainIndex].copyWith(
+                        isfavorite: !views[mainIndex].isfavorite
+                      );
+                      searchInCategory(typeOfCategory);
                     });
                     
                    },);
