@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_6/model_card.dart';
 import 'package:flutter_application_6/widgets/CustomBottunTask.dart';
 
 class CustomDescribtion extends StatelessWidget {
-  String urlImaige;
-  String title;
-  String essay;
+  ModelCard model;
+  List <ModelCard> cart;
   CustomDescribtion({
-    required this.urlImaige,
-    required this.title,
-    required this.essay
+    required this.model,
+    required this.cart
   });
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class CustomDescribtion extends StatelessWidget {
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.3,
-                  child: Image(image: AssetImage(urlImaige)),
+                  child: Image(image: AssetImage(model.urlImaige)),
                 ),
                 SizedBox(height: 30,),
                 SizedBox(
@@ -40,7 +39,7 @@ class CustomDescribtion extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(title,
+                    Text(model.title,
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold
@@ -53,7 +52,7 @@ class CustomDescribtion extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     Text(essay,
+                     Text(model.subtitle,
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.grey
@@ -82,8 +81,12 @@ class CustomDescribtion extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomBottunTask(buttonChild: Text("\$9.99",style: TextStyle(fontSize: 20,color: Colors.white),)),
-                     CustomBottunTask(buttonChild: Text("ORDER NOW",style: TextStyle(fontSize: 20,color: Colors.white),))
+                    CustomBottunTask(buttonChild: Text("\$${model.price}",style: TextStyle(fontSize: 20,color: Colors.white),)),
+                     CustomBottunTask(buttonChild: InkWell(
+                      onTap: () {
+                        cart.add(model);
+                      },
+                      child: Text("ORDER NOW",style: TextStyle(fontSize: 20,color: Colors.white),)))
                   ]
                 )
             

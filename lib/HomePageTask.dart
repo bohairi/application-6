@@ -6,6 +6,8 @@ import 'package:flutter_application_6/widgets/CustomGridviewTask.dart';
 import 'package:flutter_application_6/widgets/custom_widget_task.dart';
 
 class HomePageTask extends StatefulWidget {
+  List <ModelCard> cart = [];
+  HomePageTask({super.key, required this.cart});
   @override
   State<HomePageTask> createState() => _HomePageTaskState();
 }
@@ -144,7 +146,8 @@ class _HomePageTaskState extends State<HomePageTask> {
                       searchInCategory(typeOfCategory);
                     });
                     
-                   },);
+                   },
+                   cart: widget.cart,);
                 }),
               )
             ],

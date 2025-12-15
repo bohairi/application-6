@@ -9,7 +9,8 @@ class CustomGridviewTask extends StatefulWidget {
 // String urlImaige;
 ModelCard model;
 VoidCallback onTap;
-CustomGridviewTask({required this.model, required this.onTap});
+List <ModelCard> cart ;
+CustomGridviewTask({required this.model, required this.onTap, required this.cart});
   @override
   State<CustomGridviewTask> createState() => _CustomGridviewTaskState();
 }
@@ -21,7 +22,8 @@ class _CustomGridviewTaskState extends State<CustomGridviewTask> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CustomDescribtion(urlImaige: "assets/image/double_chease_burger.webp", title: "Hamburger Veggie Burger", essay: "khkuh kjnkjnkj kbbkb kjbhkgjf yguftyf drgfdg gfdg  fdgfdg gfgfg dfgsg dfgsfgs gfsgs sgfsg "))),
+      // onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CustomDescribtion(urlImaige: "assets/image/double_chease_burger.webp", title: "Hamburger Veggie Burger", essay: "khkuh kjnkjnkj kbbkb kjbhkgjf yguftyf drgfdg gfdg  fdgfdg gfgfg dfgsg dfgsfgs gfsgs sgfsg ",cart: ,))),
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (_)=>CustomDescribtion(model: widget.model,cart:widget.cart,))),
       child: Card(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
