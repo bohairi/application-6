@@ -7,14 +7,14 @@ List <ModelCard> views = [
   ModelCard(title: "Chicken1", subtitle: "Fried Chicken", urlImaige: "assets/image/fried-chicken.png", isfavorite: false, category: "chicken", price: 3.5),
   ModelCard(title: "Rise1", subtitle: "Fried Rise", urlImaige: "assets/image/fried-rice.png", isfavorite: false,category: "rice", price: 6.40),
   ModelCard(title: "Pizza1", subtitle: "Pizza hot", urlImaige: "assets/image/pizza.png", isfavorite: false, category: "pizza", price: 7.60),
-  ModelCard(title: "Hamburger1", subtitle: "Double Chease", urlImaige: "assets/image/double_chease_burger.webp", isfavorite: false , category: "burger",price: 4.90),
-  ModelCard(title: "Chicken1", subtitle: "Fried Chicken", urlImaige: "assets/image/fried-chicken.png", isfavorite: false, category: "chicken", price: 3.5),
-  ModelCard(title: "Rise1", subtitle: "Fried Rise", urlImaige: "assets/image/fried-rice.png", isfavorite: false,category: "rice", price: 6.40),
-  ModelCard(title: "Pizza1", subtitle: "Pizza hot", urlImaige: "assets/image/pizza.png", isfavorite: false, category: "pizza", price: 7.60),
-  ModelCard(title: "Hamburger1", subtitle: "Double Chease", urlImaige: "assets/image/double_chease_burger.webp", isfavorite: false , category: "burger",price: 4.90),
-  ModelCard(title: "Chicken1", subtitle: "Fried Chicken", urlImaige: "assets/image/fried-chicken.png", isfavorite: false, category: "chicken", price: 3.5),
-  ModelCard(title: "Rise1", subtitle: "Fried Rise", urlImaige: "assets/image/fried-rice.png", isfavorite: false,category: "rice", price: 6.40),
-  ModelCard(title: "Pizza1", subtitle: "Pizza hot", urlImaige: "assets/image/pizza.png", isfavorite: false, category: "pizza", price: 7.60),];
+  ModelCard(title: "Hamburger2", subtitle: "Double Chease", urlImaige: "assets/image/double_chease_burger.webp", isfavorite: false , category: "burger",price: 4.90),
+  ModelCard(title: "Chicken2", subtitle: "Fried Chicken", urlImaige: "assets/image/fried-chicken.png", isfavorite: false, category: "chicken", price: 3.5),
+  ModelCard(title: "Rise2", subtitle: "Fried Rise", urlImaige: "assets/image/fried-rice.png", isfavorite: false,category: "rice", price: 6.40),
+  ModelCard(title: "Pizza2", subtitle: "Pizza hot", urlImaige: "assets/image/pizza.png", isfavorite: false, category: "pizza", price: 7.60),
+  ModelCard(title: "Hamburger3", subtitle: "Double Chease", urlImaige: "assets/image/double_chease_burger.webp", isfavorite: false , category: "burger",price: 4.90),
+  ModelCard(title: "Chicken3", subtitle: "Fried Chicken", urlImaige: "assets/image/fried-chicken.png", isfavorite: false, category: "chicken", price: 3.5),
+  ModelCard(title: "Rise3", subtitle: "Fried Rise", urlImaige: "assets/image/fried-rice.png", isfavorite: false,category: "rice", price: 6.40),
+  ModelCard(title: "Pizza3", subtitle: "Pizza hot", urlImaige: "assets/image/pizza.png", isfavorite: false, category: "pizza", price: 7.60),];
 
 
   List <ModelCard> categoryList = [];

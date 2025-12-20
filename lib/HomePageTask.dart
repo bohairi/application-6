@@ -14,6 +14,7 @@ class HomePageTask extends StatefulWidget {
 
 class _HomePageTaskState extends State<HomePageTask> {
   String typeOfCategory = "all";
+  int indexofCategory = 0;
   searchInEditText (String query){
     if(query.isEmpty){
       searchInCategory(typeOfCategory);
@@ -22,6 +23,7 @@ class _HomePageTaskState extends State<HomePageTask> {
     final filterdText = categoryList.where((m) => m.title.toLowerCase().contains(query)).toList();
     categoryList = filterdText;}
   }
+  
   searchInCategory(String type){
     typeOfCategory = type;
     if (type.toLowerCase() == "all"){
@@ -37,7 +39,6 @@ class _HomePageTaskState extends State<HomePageTask> {
     }
 
   }
-  
   @override
   Widget build(BuildContext context) {
     return 
@@ -127,10 +128,12 @@ class _HomePageTaskState extends State<HomePageTask> {
                   itemCount: texts.length,
                   itemBuilder: (context,index){
                     return InkWell(
-                      onTap: () => setState(() {
+                      onTap: () => 
+                      setState(() {
                         searchInCategory(texts[index]);
+                        indexofCategory = index;
                       }),
-                      child: CustomWidgetTask(widget_title: texts[index]));
+                      child: CustomWidgetTask(widget_title: texts[index], color: indexofCategory == index ? Colors.red : Colors.grey,colorOfText: indexofCategory == index ? Colors.white : Colors.black,));
                 }),
               ),
               Expanded(
