@@ -17,6 +17,7 @@ class _ScaleClassState extends State<ScaleClass> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GestureDetector(
+        
         onHorizontalDragStart: (details) {
           startDragx = details.localPosition.dx;
         },
@@ -38,7 +39,6 @@ class _ScaleClassState extends State<ScaleClass> {
               height: 200,
               color: Colors.blueAccent,
               child: Center(child: Text("hi", style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
-          
             ),
           ),
         ),
