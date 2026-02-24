@@ -1,6 +1,6 @@
   import 'package:flutter_application_6/model_card.dart';
 
-List <String> texts = ["All","Burger","Chicken","Rice","Pizza","Burger","Chicken","Rice","Pizza"];
+List <String> texts = ["All","Burger","Chicken","Rice","Pizza"];
 
 List <ModelCard> views = [
   ModelCard(title: "Hamburger1", subtitle: "Double Chease", urlImaige: "assets/image/double_chease_burger.webp", isfavorite: false , category: "burger",price: 4.90),

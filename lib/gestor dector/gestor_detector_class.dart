@@ -1,5 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_6/gestor%20dector/second_page_class.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GestorDetectorClass extends StatefulWidget {
   GestorDetectorClass({super.key});
@@ -10,8 +12,22 @@ class GestorDetectorClass extends StatefulWidget {
 
 class _GestorDetectorClassState extends State<GestorDetectorClass> {
   @override
+  void initState() {
+    getData();
+    super.initState();
+  }
   bool flag = false;
 
+ setData(bool flag2) async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  await preferences.setBool("flag", flag2);
+ }
+ getData() async {
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  setState(() {
+    flag = preferences.getBool("flag") ?? false;
+  });
+ }
   Widget build(BuildContext context) {
     return GestureDetector(
       onHorizontalDragUpdate: (DragUpdateDetails details) {
@@ -29,7 +45,8 @@ class _GestorDetectorClassState extends State<GestorDetectorClass> {
               color: flag? Colors.amber: Colors.black),
               SizedBox(height: 100,),
               GestureDetector(
-                onTap: () {
+                onTap: () { 
+                  setData(!flag);
                   setState(() {
                     flag = !flag;
                   });

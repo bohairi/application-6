@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_application_6/admin.dart';
 import 'package:flutter_application_6/data_base.dart';
 import 'package:flutter_application_6/model_card.dart';
 import 'package:flutter_application_6/widgets/CustomGridviewTask.dart';
@@ -13,7 +16,7 @@ class HomePageTask extends StatefulWidget {
 }
 
 class _HomePageTaskState extends State<HomePageTask> {
-  String typeOfCategory = "all";
+  String typeOfCategory = "All";
   int indexofCategory = 0;
   searchInEditText (String query){
     if(query.isEmpty){
@@ -112,9 +115,11 @@ class _HomePageTaskState extends State<HomePageTask> {
                     borderRadius: BorderRadius.circular(10)
           
                     ),
-                    child: Icon(Icons.settings_input_antenna,
+                    child: IconButton(onPressed: (){
+                      FirebaseAuth.instance.signOut();
+                    }, icon: Icon(Icons.logout,
                     color: Colors.white,
-                    size: 30,),
+                    size: 30,),),
                   )
                 ],
               ),
@@ -137,26 +142,51 @@ class _HomePageTaskState extends State<HomePageTask> {
                 }),
               ),
               Expanded(
-                child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),itemCount: categoryList.length, itemBuilder: (context,index){
-                   return CustomGridviewTask(model: categoryList[index], 
-                   onTap: (){
-                    setState(() {
-                      final item = categoryList[index];
-                      final mainIndex = views.indexOf(item);
-                      views[mainIndex] = views[mainIndex].copyWith(
-                        isfavorite: !views[mainIndex].isfavorite
-                      );
-                      searchInCategory(typeOfCategory);
-                    });
-                    
-                   },
-                   cart: widget.cart,);
+                child: StreamBuilder(stream: filterCategory().snapshots(), builder: (context,snapshot){
+                  if(snapshot.connectionState == ConnectionState.waiting){
+                    return Center(child: CircularProgressIndicator(),);
+                  }
+                  else if(!snapshot.hasData || snapshot.data!.docs.isEmpty){
+                    return Center(child: Text("No Products"),);
+                  }
+                  final products = snapshot.data!.docs.map((doc) => ModelCard.fromMap(doc.data() as Map <String,dynamic>, doc.id)).toList();
+                  return GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),itemCount: products.length, itemBuilder: (context,index){
+                    return CustomGridviewTask(model: products[index], onTap: (){
+                      addFav(products[index]);
+                    }, cart: products);
+                  });
                 }),
+                // child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),itemCount: categoryList.length, itemBuilder: (context,index){
+                //    return CustomGridviewTask(model: categoryList[index], 
+                //    onTap: (){
+                //     setState(() {
+                //       final item = categoryList[index];
+                //       final mainIndex = views.indexOf(item);
+                //       views[mainIndex] = views[mainIndex].copyWith(
+                //         isfavorite: !views[mainIndex].isfavorite
+                //       );
+                //       searchInCategory(typeOfCategory);
+                //     });
+                    
+                //    },
+                //    cart: widget.cart,);
+                // }),
               )
             ],
           ),
         ),
 
       );
+  }
+  Query filterCategory(){
+    if(typeOfCategory == "All"){
+      return FirebaseFirestore.instance.collection("products");
+    }
+    return FirebaseFirestore.instance.collection("products").where("category", isEqualTo: typeOfCategory);
+  }
+
+  Future<void> addFav(ModelCard product) async{
+    String id = FirebaseAuth.instance.currentUser!.uid;
+    await FirebaseFirestore.instance.collection("users").doc(id).collection("isFav").doc(product.id).set(product.toMap());
   }
 }
