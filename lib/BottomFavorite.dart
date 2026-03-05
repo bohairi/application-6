@@ -32,7 +32,14 @@ class _BottomFavoriteState extends State<BottomFavorite> {
       }
       final favorit = snapshot.data!.docs.map((cart) => ModelCard.fromMap(cart.data(), cart.id)).toList();
       return ListView.builder(itemCount: favorit.length,itemBuilder: (context,index){
-        return CustomFavCard(modelCard: favorit[index], onTap: (){});
+        return CustomFavCard(modelCard: favorit[index], onTap: (){
+          if(favorit[index].isfavorite){
+            FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).collection("isFav").doc(favorit[index].id).delete();
+          }
+          else{
+            FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).collection("isFav").doc(favorit[index].id).set(favorit[index].toMap());
+          }
+        });
       });
     });
     // List <ModelCard> favMeals = views.where((m) => m.isfavorite == true).toList();

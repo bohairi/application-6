@@ -31,12 +31,13 @@ Map<String,dynamic> toMap(){
     "category" : category,
     "price" : price,
     "description" : subtitle,
-    "img" : urlImaige
+    "img" : urlImaige,
+    "isfavorite" : isfavorite,
   };
 }
 //fromMap
 factory ModelCard.fromMap(Map<String,dynamic> map, String docID){
-  return ModelCard(id: docID, title: map["name"], subtitle: map["description"], urlImaige: map["img"], category: map["category"], price: map["price"]);
+  return ModelCard(isfavorite: map["isfavorite"],id: docID, title: map["name"], subtitle: map["description"], urlImaige: map["img"], category: map["category"], price: map["price"]);
 }
 }
 

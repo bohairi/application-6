@@ -23,7 +23,7 @@ class CustomFavCard extends StatelessWidget {
               trailing: InkWell
               (
                 onTap: onTap,
-                child: Icon(Icons.favorite, color: Colors.red,)),
+                child: modelCard.isfavorite? Icon(Icons.favorite,color: Colors.red,) : Icon(Icons.favorite_border, color: Colors.red,)),
             ),
           ),
         ),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_6/ShowProductsScreen.dart';
 import 'package:flutter_application_6/model_card.dart';
 
 class Admin extends StatefulWidget {
@@ -57,7 +58,7 @@ class _AdminState extends State<Admin> {
             children: [
               // البطاقة البيضاء (Container) التي تحتوي على العناصر
               Container(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(20),
@@ -147,6 +148,15 @@ class _AdminState extends State<Admin> {
                   ],
                 ),
               ),
+              SizedBox(height: 10,),
+              ElevatedButton(onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=> Showproductsscreen()));
+              }, child: Text("Show Products", style: TextStyle(color: Colors.white),),style: ElevatedButton.styleFrom(
+                backgroundColor: primaryColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12)
+                )
+              ),)
             ],
           ),
         ),
